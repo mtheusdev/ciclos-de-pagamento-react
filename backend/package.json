@@ -1,5 +1,5 @@
 {
-  "name": "my-monet-backend",
+  "name": "my-money-backend",
   "version": "1.0.0",
   "description": "",
   "main": "src/loader.js",
@@ -11,7 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
     "express-query-int": "^1.0.1",
     "lodash": "^4.17.4",
     "mongoose": "^4.7.0",
@@ -20,6 +21,6 @@
     "pm2": "^2.1.5"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^1.11.0"
   }
 }
