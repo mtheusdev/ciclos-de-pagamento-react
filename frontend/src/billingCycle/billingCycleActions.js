@@ -6,18 +6,20 @@ import { showTabs, selectTab } from "../common/tab/tabActions";
 const BASE_URL = "http://localhost:3003/api";
 const INITIAL_VALUES = {};
 
-export function getList() {
-  const request = axios.get(`${BASE_URL}/billingCycles`);
-  return {
-    type: "BILLING_CYCLES_FETCHED",
-    payload: request,
-  };
+export function update(values) {
+  return submit(values, "put");
+}
+export function remove(values) {
+  return submit(values, "delete");
+}
+export function create(values) {
+  return submit(values, "post");
 }
 
-export function create(values) {
+function submit(values, method) {
   return (dispatch) => {
-    axios
-      .post(`${BASE_URL}/billingCycles`, values)
+    const id = values._id ? values._id : "";
+    axios[method](`${BASE_URL}/billingCycles/${id}`, values)
       .then(() => {
         toastr.success("Sucesso", "Operação Realizada com sucesso.");
         dispatch(init());
@@ -28,10 +30,26 @@ export function create(values) {
   };
 }
 
+export function getList() {
+  const request = axios.get(`${BASE_URL}/billingCycles`);
+  return {
+    type: "BILLING_CYCLES_FETCHED",
+    payload: request,
+  };
+}
+
 export function showUpdate(billingCycle) {
   return [
     showTabs("tabUpdate"),
     selectTab("tabUpdate"),
+    initialize("billingCycleForm", billingCycle),
+  ];
+}
+
+export function showDelete(billingCycle) {
+  return [
+    showTabs("tabDelete"),
+    selectTab("tabDelete"),
     initialize("billingCycleForm", billingCycle),
   ];
 }
